@@ -41,6 +41,27 @@ public class GamesManagement {
                
            return elements;
       }
+         
+         
+          public static ArrayList getAttributsbyTagName(String chaine,String tagname){
+           ArrayList<String> elements = new ArrayList<>();
+           String vol=null;
+           Pattern p=Pattern.compile("<"+tagname+" (.+?)>(.*)</"+tagname+">", Pattern.DOTALL);
+           Matcher m=p.matcher(chaine);
+           while(m.find()){
+              Pattern p1=Pattern.compile("(.+?)=['\"](.+?)['\"]", Pattern.DOTALL);
+               Matcher m1=p1.matcher(m.group(1));
+               while(m1.find()){
+                   System.out.println(m1.group(1)+":"+m1.group(2));
+               }
+           }
+           if(elements.isEmpty()){
+               String err="not found";
+               elements.add(err);
+           }
+               
+           return elements;
+      }
     
         public static void Read(){
             String line="";
@@ -189,16 +210,18 @@ public class GamesManagement {
         }
             
         
+        
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
         
-        Read();
+       // Read();
       //  Game x=new Game("7","spiderssman","action"); 
       //  insert(x);
        // edit("7","marsssssssioqa","hello");
-        delete("7");
+       // delete("7");
+       getAttributsbyTagName("<a href='qsf' value='qsfqsf' id='qsf' class='aaaaa' >Lien</a>","a");
     }
     
 }
